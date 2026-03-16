@@ -1,28 +1,28 @@
 # Study APIR
 
-API de estudo de Spring Boot
+Projeto de estudo utilizando Spring Boot
 
 ## 🚀 Instruções de uso
 
-Para executar a aplicação diretamente pelo Maven:
+- Para executar a aplicação:
 
-```
-mvn spring-boot:run
-```
+  ```
+  mvn spring-boot:run
+  ```
 
-Após iniciar a aplicação, a documentação estará disponível em:
 
-```
-http://localhost:9000/swagger-ui/index.html
-```
+## ⚙️ Configurações no application.properties
 
-## ⚙️ Configuração de porta
+- Porta da aplicação:
+  ```
+  server.port=9000
+  ```
 
-A porta padrão pode ser alterada no arquivo `application.properties`:
+- Caminho da documentação Swagger  
+  ```
+  springdoc.swagger-ui.path=/
+  ```
 
-```
-server.port=9000
-```
 
 ## 📦 Dependências
 
@@ -38,40 +38,39 @@ O projeto pode ser empacotado e executado como um arquivo .jar.
 
 - Gerar o .jar
 
-```
-mvn package
-```
+  ```
+  mvn package
+  ```
 
 - Remover o .jar
 
-```
-mvn clean
-```
+  ```
+  mvn clean
+  ```
 
-- Remove a versão antiga e gera nova
+- Limpar artefatos antigos e gerar novo .jar
 
-```
-mvn clean package
-```
+  ```
+  mvn clean package
+  ```
 
-- Executa a aplicação pelo .jar
+- Executar a aplicação pelo .jar
 
-```
-java -jar target/nome-do-jar.jar
-```
+  ```
+  java -jar target/nome-do-jar.jar
+  ```
 
-- Define nome fixo para o .jar
-  Para não precisar alterar manualmente o nome do arquivo a cada versão, configure o `pom.xml`:
+- Para manter um nome fixo para o arquivo .jar em todas as versões, configure o pom.xml da seguinte forma:
 
-```
-<build>
-    <finalName>app</finalName>
-    ...
-</build>
-```
+  ```
+  <build>
+      <finalName>app</finalName>
+      ...
+  </build>
+  ```
 
 - Após isso, o comando para executar será sempre:
 
-```
-java -jar target/app.jar
-```
+  ```
+  java -jar target/app.jar
+  ```
