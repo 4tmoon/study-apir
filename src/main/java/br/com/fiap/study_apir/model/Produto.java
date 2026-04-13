@@ -10,8 +10,10 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 public class Produto {
-    private final Long id;
-    private final String nome;
-    private final BigDecimal valor;
+    private Long id;
+    private String nome;
+    private BigDecimal valor;
 
+    public Produto(long l, String uva, BigDecimal bigDecimal) {
+    }
 }
