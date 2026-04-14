@@ -21,6 +21,9 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(long l, String uva, BigDecimal bigDecimal) {
+    public Produto(Long id, BigDecimal valor, String nome) {
+        this.id = id;
+        this.valor = valor;
+        this.nome = nome;
     }
 }

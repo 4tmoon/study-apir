@@ -14,8 +14,8 @@ public class RepositoryProdutoMockup {
     private long ID = 1L;
 
     public RepositoryProdutoMockup() {
-        produtos.add(new Produto(ID++, "Maça", BigDecimal.valueOf(10.50)));
-        produtos.add(new Produto(ID++, "Uva", BigDecimal.valueOf(15.23)));
+//        produtos.add(new Produto(ID++, "Maça", BigDecimal.valueOf(10.50)));
+//        produtos.add(new Produto(ID++, "Uva", BigDecimal.valueOf(15.23)));
     }
 
     public List<Produto> findAll() {
