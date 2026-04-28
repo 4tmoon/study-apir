@@ -1,7 +1,6 @@
 package br.com.fiap.study_apir.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import br.com.fiap.study_apir.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,43 +24,37 @@ public class ProdutoController {
     @Autowired
     private ProdutoRepository repository;
 
-    @PostMapping
-    public ResponseEntity<Produto> create(@RequestBody Produto produto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(produto));
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Produto> findById(@PathVariable Long id) {
-        return repository
-                .findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
 
     @GetMapping
     public ResponseEntity<List<Produto>> findAll() {
         return ResponseEntity.ok(repository.findAll());
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<String> update(@PathVariable Long id,
-//                                         @RequestBody Produto produto) {
-//        if (mockup.update(id, produto)) {
-//            return ResponseEntity.ok("Produto atualizado");
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Produto> findById(@PathVariable Long id) {
+        return repository.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<Produto> create(@RequestBody Produto produto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(produto));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Produto> update(@PathVariable Long id, @RequestBody Produto produto) {
+        return repository.findById(id).map(produtoExistente -> {
+            produto.setId(id);
+            Produto atualizado = repository.save(produto);
+            return ResponseEntity.ok(atualizado);
+        }).orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        if (!repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
         repository.deleteById(id);
-        return ResponseEntity.notFound().build();
-
-//        if (mockup.deleteById(id)) {
-//            return ResponseEntity.noContent().build();
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
+        return ResponseEntity.noContent().build();
     }
 }
