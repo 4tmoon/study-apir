@@ -27,15 +27,15 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> create(@RequestBody Cliente Cliente) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(Cliente));
+    public ResponseEntity<Cliente> create(@RequestBody Cliente cliente) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(cliente));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> update(@PathVariable Long id, @RequestBody Cliente Cliente) {
+    public ResponseEntity<Cliente> update(@PathVariable Long id, @RequestBody Cliente cliente) {
         return repository.findById(id).map(ClienteExistente -> {
-            Cliente.setId(id);
-            Cliente atualizado = repository.save(Cliente);
+            cliente.setId(id);
+            Cliente atualizado = repository.save(cliente);
             return ResponseEntity.ok(atualizado);
         }).orElseGet(() -> ResponseEntity.notFound().build());
     }
